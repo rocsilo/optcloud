@@ -6,24 +6,11 @@ Primer he creat la topologia de xarxa on tenim:
 - Tres subxarxes (subnets)
 - 2 instàncies EC2 a cada subnet
 
-![Topologia de la xarxa](../assets/Images/Topologia.png)
+![Topologia de la xarxa](../assets/Images/Topologia-2.png)
 
-## Exercici 1
+## Exercici 2
 
-En aquest exercici creem 2 instàncies EC2 amb les següents característiques:
 
-```hcl
-provider "aws" {
-    region = "us-east-1"    # Regió on es creen els recursos
-}
-
-resource "aws_instance" "ec2_instance_1" {
-  ami           = "ami-0c02fb55956c7d316"  # "software de la instància "Amazon Linux 2023
-  instance_type = "t3.micro"               # Tipus d'instància
-  tags = {
-    Name = "ec2-instance-1"                # Nom a la consola AWS
-  }
-}
 
 
 
