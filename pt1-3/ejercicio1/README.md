@@ -8,7 +8,10 @@ Primer he creat la topologia de xarxa on tenim:
 
 ![Topologia de la xarxa](../assets/Images/Topologia-1.png)
 
-## Exercici 1
+# Exercici 1
+
+## TERRAFORM
+
 
 En aquest exercici creem 2 instàncies EC2 amb les següents característiques:
 
