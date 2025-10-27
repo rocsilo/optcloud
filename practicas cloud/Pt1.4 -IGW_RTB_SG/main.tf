@@ -1,7 +1,7 @@
 
 
-# --!Si el chat me ha dado una pequeña ayudita 😉😉😉 però esta todo entendido a la perfeción!--
-
+# --!Si el chat me ha dado una pequeña ayudita  però esta todo entendido a la perfeción! 😉😉😉--
+#-------------------------------------CONFIGS QUE NO ENTIENDO MUY BIEN XD-------------------------------------------------------#
 # Configuración de Terraform y proveedor
 terraform {
   required_providers {
@@ -15,7 +15,7 @@ terraform {
 provider "aws" {
   region = "us-east-1"  # Define la región de AWS donde se desplegarán los recursos
 }
-
+#-----------------------------------------------------VPC----------------------------------------------------------------------#
 # Crear VPC (Virtual Private Cloud)
 resource "aws_vpc" "vpc_03" {
   cidr_block           = "10.0.0.0/16"  # Define el rango de IPs de la VPC (65,536 IPs)
@@ -26,7 +26,7 @@ resource "aws_vpc" "vpc_03" {
     Name = "VPC-03"  # Etiqueta para identificar la VPC en la consola AWS
   }
 }
-
+#----------------------------------------------------INTERNET GATEWAY----------------------------------------------------------#
 # Crear Internet Gateway
 resource "aws_internet_gateway" "igw" {  # CORREGIDO: Cambiado de ig_main a igw
   vpc_id = aws_vpc.vpc_03.id  # Asocia el Internet Gateway a la VPC creada
@@ -36,6 +36,8 @@ resource "aws_internet_gateway" "igw" {  # CORREGIDO: Cambiado de ig_main a igw
   }
 }
 
+
+#----------------------------------------------------SUBREDS PUBLICAS----------------------------------------------------------#
 # Crear subred pública A
 resource "aws_subnet" "public_subnet_a" {
   vpc_id                  = aws_vpc.vpc_03.id  # Asocia la subred a la VPC
@@ -50,16 +52,16 @@ resource "aws_subnet" "public_subnet_a" {
 
 # Crear subred pública B
 resource "aws_subnet" "public_subnet_b" {
-  vpc_id                  = aws_vpc.vpc_03.id  # Asocia la subred a la VPC
-  cidr_block              = "10.0.2.0/24"      # Rango de 256 IPs para esta subred
-  availability_zone       = "us-east-1b"       # Zona de disponibilidad diferente
-  map_public_ip_on_launch = true               # Asigna IP pública automáticamente
+  vpc_id                  = aws_vpc.vpc_03.id  
+  cidr_block              = "10.0.2.0/24"      
+  availability_zone       = "us-east-1b"       
+  map_public_ip_on_launch = true               
 
   tags = {
     Name = "Public-Subnet-B"  # Etiqueta para identificar la subred
   }
 }
-
+#----------------------------------------------CREAR TABLAS DE RUTAS----------------------------------------------------------#
 # Crear tabla de rutas pública
 resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.vpc_03.id  # Asocia la tabla de rutas a la VPC
@@ -82,16 +84,17 @@ resource "aws_route_table_association" "public_rt_assoc_a" {
 
 # Asociar tabla de rutas con subred B
 resource "aws_route_table_association" "public_rt_assoc_b" {
-  subnet_id      = aws_subnet.public_subnet_b.id  # Subred a asociar
-  route_table_id = aws_route_table.public_rt.id   # Tabla de rutas a aplicar
+  subnet_id      = aws_subnet.public_subnet_b.id  
+  route_table_id = aws_route_table.public_rt.id   
 }
-
+#----------------------------------------------------GRUPO DE SEGURIDAD----------------------------------------------------------#
 # Crear grupo de seguridad
 resource "aws_security_group" "ec2_sg" {
   name        = "ec2-security-group"    # Nombre del grupo de seguridad
   description = "Security group for EC2 instances"  # Descripción
   vpc_id      = aws_vpc.vpc_03.id       # Asocia el grupo a la VPC
 
+#----------------------------------------------------------REGLAS----------------------------------------------------------------#
   # Regla SSH desde cualquier lugar
   ingress {
     from_port   = 22                    # Puerto SSH
@@ -123,7 +126,7 @@ resource "aws_security_group" "ec2_sg" {
     Name = "EC2-Security-Group"  # Etiqueta identificativa
   }
 }
-
+#----------------------------------------------------INSTANCIAS EC2---------------------------------------------------------------#
 # Crear instancia EC2 en subred A
 resource "aws_instance" "ec2_a" {
   ami                    = "ami-0c02fb55956c7d316"  # AMI de Amazon Linux 2023
@@ -150,6 +153,7 @@ resource "aws_instance" "ec2_b" {
   }
 }
 
+#----------------------------------------------------OUTPUTS-----------------------------------------------------------------------#
 # Outputs - Información que se mostrará después del despliegue
 output "vpc_id" {
   description = "ID de la VPC creada"
