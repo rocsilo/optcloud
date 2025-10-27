@@ -1,13 +1,12 @@
 #-----------------------------COMPROVACIONS DE QUE TOT S'HA CREAT ---------------------#
-![vpc](../Pt1.4%20-IGW_RTB_SG/fotos/vps.png)
-![vpc](../Pt1.4%20-IGW_RTB_SG/fotos/internet%20gateway.png)
-![vpc](../Pt1.4%20-IGW_RTB_SG/fotos/subnets.png)
-![vpc](../Pt1.4%20-IGW_RTB_SG/fotos/security%20group.png)
-![vpc](../Pt1.4%20-IGW_RTB_SG/fotos/inboud%20rules.png)
-![vpc](../Pt1.4%20-IGW_RTB_SG/fotos/outout%20rules.png)
-![vpc](../Pt1.4%20-IGW_RTB_SG/fotos/route%20table.png)
+
+![alt text](fotos/vps.png)
+![alt text](fotos/internet_gateway.png)
+![alt text](fotos/subnets.png)
+![alt text](fotos/outout_rules.png)
+![alt text](fotos/inboud_rules.png)
 
 #-----------------------------COMPROVACIONS DE FUNCIONA---------------------#
+![alt text](fotos/ec2-a_ssh.png)
 
-![vpc](../Pt1.4%20-IGW_RTB_SG/fotos/ec2-a%20ssh.png)
-![vpc](../Pt1.4%20-IGW_RTB_SG/fotos/comprovació%20pings.png)
+![alt text](fotos/comprovacio_pings.png)
